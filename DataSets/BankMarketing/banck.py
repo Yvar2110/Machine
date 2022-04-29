@@ -11,9 +11,8 @@ import pandas as pd
 url = 'bank-full.csv'
 
 #DATASET BANK FULL
-
 data = pd.read_csv(url)
-
+##############################################################33
 
 #Remplazos
 data.default.replace(['no','yes'], [0,1], inplace= True)
@@ -33,7 +32,7 @@ data.age = pd.cut(data.age, rangos, labels=nombres)
 data.dropna(axis=0,how='any', inplace=True)
 
 #---------------------------------------------------------------------------------------------------
-#Columnas Innecesarias
+#Columns innecesarys 
 data.drop(['balance', 'day', 'month', 'duration','campaign','pdays','previous'], axis= 1, inplace = True)
 
 #Dividir Data
@@ -72,6 +71,46 @@ print(f'accuracy de Test de Entrenamiento: {logreg.score(x_test, y_test)}')
 print(f'accuracy de Validación: {logreg.score(x_test_out, y_test_out)}')
 
 
+# VECTOR SUPPORT MACHINE
+# MODELO
+svc = SVC(gamma='auto')
+
+# ENTRENAMIENTO
+svc.fit(x_train, y_train)
+
+# MÉTRICAS
+
+print('*'*50)
+print('Maquina de soporte vectorial')
+
+# Accuracy de Entrenamiento de Entrenamiento
+print(f'accuracy de Entrenamiento de Entrenamiento: {svc.score(x_train, y_train)}')
+
+# Accuracy de Test de Entrenamiento
+print(f'accuracy de Test de Entrenamiento: {svc.score(x_test, y_test)}')
+
+# Accuracy de Validación
+print(f'accuracy de Validación: {svc.score(x_test_out, y_test_out)}')
+
+# ARBOL DE DECISIÓN
+# Seleccionando un modelo
+arbol = DecisionTreeClassifier()
+# Entreno el modelo
+arbol.fit(x_train, y_train)
+
+# MÉTRICAS
+
+print('*'*50)
+print('Decisión Tree')
+
+# Accuracy de Entrenamiento de Entrenamiento
+print(f'accuracy de Entrenamiento de Entrenamiento: {arbol.score(x_train, y_train)}')
+
+# Accuracy de Test de Entrenamiento
+print(f'accuracy de Test de Entrenamiento: {arbol.score(x_test, y_test)}')
+
+# Accuracy de Validación
+print(f'accuracy de Validación: {arbol.score(x_test_out, y_test_out)}')
 
 # MAQUINA DE SOPORTE VECTORIAL-------------------------------------------------
 
@@ -120,36 +159,30 @@ print(f'accuracy de Validación: {arbol.score(x_test_out, y_test_out)}')
 
 
 
-# RANDOM FOREST------------------------------------------------------------
 
-# Seleccionar un modelo
+
 forest = RandomForestClassifier()
 
-# Entreno el modelo
 forest.fit(x_train, y_train)
 
-# MÉTRICAS
 
 print('*'*50)
 print('RANDOM FOREST')
 
-# Accuracy de Entrenamiento de Entrenamiento
 print(f'accuracy de Entrenamiento de Entrenamiento: {forest.score(x_train, y_train)}')
 
-# Accuracy de Test de Entrenamiento
+
 print(f'accuracy de Test de Entrenamiento: {forest.score(x_test, y_test)}')
 
 # Accuracy de Validación
 print(f'accuracy de Validación: {forest.score(x_test_out, y_test_out)}')
 
 
-# NAIVE BAYES------------------------------------------------------------
+# NAIVE BAYES
 
-
-# Seleccionar un modelo
 nayve = GaussianNB()
 
-# Entreno el modelo
+
 nayve.fit(x_train, y_train)
 
 # MÉTRICAS
@@ -165,3 +198,4 @@ print(f'accuracy de Test de Entrenamiento: {nayve.score(x_test, y_test)}')
 
 # Accuracy de Validación
 print(f'accuracy de Validación: {nayve.score(x_test_out, y_test_out)}')
+
